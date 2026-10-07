@@ -1,0 +1,21 @@
+[project]
+name = "homework3"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Manuel Velazquez", email = "Mvelazquezhu2024@fau.edu" }
+]
+requires-python = ">=3.13"
+dependencies = [
+    "langchain>=1.4.3",
+    "langchain-community>=0.4.2",
+    "langchain-openai>=1.6.7",
+]
+
+[project.scripts]
+homework3 = "homework3:main"
+
+[build-system]
+requires = ["uv_build>=0.12.23,<0.13.0"]
+build-backend = "uv_build"

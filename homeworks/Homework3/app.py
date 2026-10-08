@@ -7,7 +7,7 @@ from getpass import getpass
 from langchain.agents import create_agent
 from langchain_core.tools import tool
 from langchain_experimental.tools import PythonREPLTool
-from langchain_openai import ChatOpenAI
+from langchain_google_genai import ChatGoogleGenerativeAI
 
 
 @tool
@@ -70,17 +70,16 @@ def analyze_password_strength(password: str) -> str:
 def create_homework_agent():
 	"""Create an agent configured with Python, file hashing, and password tools.
 
-	The API key is read from ``OPENAI_API_KEY``. Set ``OPENAI_MODEL`` to
-	choose a model and ``OPENAI_BASE_URL`` to use another OpenAI-compatible API.
+	The API key is read from ``GOOGLE_API_KEY``. Set ``GOOGLE_MODEL`` to choose
+	a model; it defaults to ``gemini-2.5-flash``.
 	"""
-	api_key = os.environ.get("OPENAI_API_KEY")
+	api_key = os.environ.get("GOOGLE_API_KEY")
 	if not api_key:
-		raise RuntimeError("Set the OPENAI_API_KEY environment variable first.")
+		raise RuntimeError("Set the GOOGLE_API_KEY environment variable first.")
 
-	model = ChatOpenAI(
-		model=os.environ.get("OPENAI_MODEL", "gpt-4o-mini"),
-		api_key=api_key,
-		base_url=os.environ.get("OPENAI_BASE_URL"),
+	model = ChatGoogleGenerativeAI(
+		model=os.environ.get("GOOGLE_MODEL", "gemini-2.5-flash"),
+		google_api_key=api_key,
 	)
 	python_tool = PythonREPLTool()
 

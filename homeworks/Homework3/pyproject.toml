@@ -11,7 +11,7 @@ dependencies = [
     "langchain>=1.4.3",
     "langchain-community>=0.4.2",
     "langchain-experimental>=0.4.2",
-    "langchain-openai>=1.6.7",
+    "langchain-google-genai>=4.4.0",
 ]
 
 [project.scripts]

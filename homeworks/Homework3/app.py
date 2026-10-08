@@ -95,6 +95,22 @@ def create_homework_agent():
 	)
 
 
+def extract_response_text(content: object) -> str:
+	"""Return readable text from a plain string or Gemini content blocks."""
+	if isinstance(content, str):
+		return content
+	if isinstance(content, list):
+		text_blocks = [
+			block["text"]
+			for block in content
+			if isinstance(block, dict)
+			and block.get("type") == "text"
+			and isinstance(block.get("text"), str)
+		]
+		return "\n".join(text_blocks)
+	return ""
+
+
 def main():
 	"""Run the interactive command-line conversation loop."""
 	agent = create_homework_agent()
@@ -117,7 +133,8 @@ def main():
 			continue
 
 		result = agent.invoke({"messages": [{"role": "user", "content": question}]})
-		print(f"Assistant: {result['messages'][-1].content}")
+		response_text = extract_response_text(result["messages"][-1].content)
+		print(f"Assistant: {response_text}")
 
 
 if __name__ == "__main__":

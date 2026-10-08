@@ -71,14 +71,14 @@ def create_homework_agent():
 	"""Create an agent configured with Python, file hashing, and password tools.
 
 	The API key is read from ``GOOGLE_API_KEY``. Set ``GOOGLE_MODEL`` to choose
-	a model; it defaults to ``gemini-2.5-flash``.
+	a model; it defaults to ``gemini-3.8-flash``.
 	"""
 	api_key = os.environ.get("GOOGLE_API_KEY")
 	if not api_key:
 		raise RuntimeError("Set the GOOGLE_API_KEY environment variable first.")
 
 	model = ChatGoogleGenerativeAI(
-		model=os.environ.get("GOOGLE_MODEL", "gemini-2.5-flash"),
+		model=os.environ.get("GOOGLE_MODEL", "gemini-3.8-flash"),
 		google_api_key=api_key,
 	)
 	python_tool = PythonREPLTool()
